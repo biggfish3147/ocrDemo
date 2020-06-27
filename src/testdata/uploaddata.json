@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "location_ltx": 30,
+        "location_lty": 30,
+        "location_rbx": 100,
+        "location_rby": 100,
+        "pic": "图片路径",
+        "date": "2020-05-21 10:00:00"
+    }
+]
