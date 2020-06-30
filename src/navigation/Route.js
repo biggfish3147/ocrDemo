@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-//import TabRoute from './TabRoute';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from 'react-native-elements';
 
@@ -15,9 +14,6 @@ import Login from '../screens/Login';
 import UserInfo from '../screens/UserInfo';
 import ChangePW from '../screens/ChangePW';
 import ScanSetting from '../screens/ScanSetting';
-import MySwiper from '../testdemo/Swiper';
-import Grid from '../testdemo/Grid';
-import GridT from '../testdemo/GridT';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -85,9 +81,6 @@ export default function Route() {
         <Stack.Screen name="UserInfo" component={UserInfo} />
         <Stack.Screen name="ChangePW" component={ChangePW} />
         <Stack.Screen name="ScanSetting" component={ScanSetting} />
-        <Stack.Screen name="Swiper" component={MySwiper} />
-        <Stack.Screen name="Grid" component={Grid} />
-        <Stack.Screen name="GridT" component={GridT} />
       </Stack.Navigator>
     </NavigationContainer>
   );
