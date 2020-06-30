@@ -8,6 +8,7 @@ import {
   StyleSheet,
   FlatList,
   ToastAndroid,
+  StatusBar,
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import Swiper from 'react-native-swiper';
@@ -37,6 +38,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.mainbody}>
+        <StatusBar backgroundColor="#3c78d8" />
         <View style={styles.swiper_style}>
           <Swiper
             showsButtons={false}

@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from 'react-native-elements';
+import {StatusBar} from 'react-native';
 
 import Home from '../screens/Home';
 import Record from '../screens/Record';
@@ -63,7 +64,7 @@ export default function Route() {
           options={{
             title: 'Welcome to OcrDemo',
             headerStyle: {
-              // #3c78d8
+              // #3c78d8 蓝色
               backgroundColor: '#3c78d8',
             },
             headerTintColor: '#fff',

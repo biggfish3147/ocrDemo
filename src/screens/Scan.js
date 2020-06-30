@@ -14,6 +14,7 @@ import {
   NativeModules,
   PixelRatio,
   Dimensions,
+  StatusBar,
 } from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import CameraRoll from '@react-native-community/cameraroll';
@@ -325,6 +326,7 @@ class Scan extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#3c78d8" hidden={true} />
         <View style={styles.topcontainer}>
           <RNCamera
             ref={ref => {
