@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView} from 'react-native';
 import {Table, TableWrapper, Row} from 'react-native-table-component';
 //import getJsonLength from '../utils/jsonLength';
 
-const testJsonArr = require('../testdata/resultdata.json');
+const testJsonArr = require('../assets/data/resultdata.json');
 //定义全局变量
 var tableData = [];
 
