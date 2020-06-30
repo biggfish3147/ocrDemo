@@ -15,6 +15,9 @@ import Login from '../screens/Login';
 import UserInfo from '../screens/UserInfo';
 import ChangePW from '../screens/ChangePW';
 import ScanSetting from '../screens/ScanSetting';
+import MySwiper from '../testdemo/Swiper';
+import Grid from '../testdemo/Grid';
+import GridT from '../testdemo/GridT';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -36,7 +39,7 @@ export function HomeTabs() {
           return (
             <Icon
               name={iconName}
-              size={size}
+              size={30}
               color={color}
               type="MaterialIcons"
             />
@@ -44,7 +47,7 @@ export function HomeTabs() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'green',
+        activeTintColor: '#3c78d8',
         inactiveTintColor: 'gray',
       }}>
       <Tab.Screen name="Home" component={Home} />
@@ -64,7 +67,8 @@ export default function Route() {
           options={{
             title: 'Welcome to OcrDemo',
             headerStyle: {
-              backgroundColor: '#f4511e',
+              // #3c78d8
+              backgroundColor: '#3c78d8',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -81,6 +85,9 @@ export default function Route() {
         <Stack.Screen name="UserInfo" component={UserInfo} />
         <Stack.Screen name="ChangePW" component={ChangePW} />
         <Stack.Screen name="ScanSetting" component={ScanSetting} />
+        <Stack.Screen name="Swiper" component={MySwiper} />
+        <Stack.Screen name="Grid" component={Grid} />
+        <Stack.Screen name="GridT" component={GridT} />
       </Stack.Navigator>
     </NavigationContainer>
   );

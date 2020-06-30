@@ -1,0 +1,22 @@
+{
+    "services": [
+        {
+            "icon": "scan",
+            "iconUri": "../assets/icons/scan.png",
+            "title": "扫描",
+            "key": "1"
+        },
+        {
+            "icon": "report",
+            "iconUri": "../assets/icons/scan.png",
+            "title": "记录",
+            "key": "2"
+        },
+        {
+            "icon": "more",
+            "iconUri": "../assets/icons/scan.png",
+            "title": "更多",
+            "key": "3"
+        }
+    ]
+}
