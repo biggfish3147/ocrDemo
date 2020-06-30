@@ -12,7 +12,7 @@ import {
 import {Button} from 'react-native-elements';
 import SplashScreen from 'react-native-splash-screen';
 import Swiper from 'react-native-swiper';
-import iconArr from '../utils/iconLoad';
+import imageArr from '../utils/imageLoad';
 
 const {width, height} = Dimensions.get('window');
 let serviceData = require('../assets/data/serviceData.json');
@@ -46,21 +46,21 @@ export default class Home extends React.Component {
             <TouchableOpacity onPress={() => this.onBannerClick()}>
               <Image
                 style={styles.imageBackground}
-                source={iconArr['banner1']}
+                source={imageArr['banner1']}
               />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => this.onBannerClick()}>
               <Image
                 style={styles.imageBackground}
-                source={iconArr['banner2']}
+                source={imageArr['banner2']}
               />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => this.onBannerClick()}>
               <Image
                 style={styles.imageBackground}
-                source={iconArr['banner3']}
+                source={imageArr['banner3']}
               />
             </TouchableOpacity>
           </Swiper>
