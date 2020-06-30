@@ -19,8 +19,6 @@ import {RNCamera} from 'react-native-camera';
 import CameraRoll from '@react-native-community/cameraroll';
 import Toast from 'react-native-easy-toast';
 
-const toastdata = require('../testdata/toastdata.json');
-
 var locxy = [];
 
 class Scan extends PureComponent {

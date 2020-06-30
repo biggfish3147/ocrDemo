@@ -9,12 +9,13 @@ import {
   FlatList,
   ToastAndroid,
 } from 'react-native';
-import {Button} from 'react-native-elements';
 import SplashScreen from 'react-native-splash-screen';
 import Swiper from 'react-native-swiper';
 import imageArr from '../utils/imageLoad';
 
 const {width, height} = Dimensions.get('window');
+
+//获取功能项数据（当前仅扫描，记录，更多）
 let serviceData = require('../assets/data/serviceData.json');
 
 export default class Home extends React.Component {
@@ -30,11 +31,12 @@ export default class Home extends React.Component {
     }, 1000);
   }
 
+  //banner点击事件
   onBannerClick() {}
+
   render() {
     return (
-      // eslint-disable-next-line react-native/no-inline-styles
-      <View style={{flex: 1, alignItems: 'flex-start'}}>
+      <View style={styles.mainbody}>
         <View style={styles.swiper_style}>
           <Swiper
             showsButtons={false}
@@ -65,37 +67,7 @@ export default class Home extends React.Component {
             </TouchableOpacity>
           </Swiper>
         </View>
-        {/* <Text>点击按钮,开始扫描</Text> */}
         <View>
-          {/* <Button
-            title="Click to Scan"
-            type="solid"
-            onPress={() => this.props.navigation.navigate('Scan')}
-          />
-          <Button
-            title="Click to Result"
-            type="solid"
-            onPress={() => this.props.navigation.navigate('Result')}
-            buttonStyle={{marginTop: 10}}
-          />
-          <Button
-            title="Click to swiper"
-            type="solid"
-            onPress={() => this.props.navigation.navigate('Swiper')}
-            buttonStyle={{marginTop: 10}}
-          />
-          <Button
-            title="Click to Grid"
-            type="solid"
-            onPress={() => this.props.navigation.navigate('Grid')}
-            buttonStyle={{marginTop: 10}}
-          />
-          <Button
-            title="Click to GridT"
-            type="solid"
-            onPress={() => this.props.navigation.navigate('GridT')}
-            buttonStyle={{marginTop: 10}}*/}
-          {/* />  */}
           <View style={styles.listcontainer}>
             <FlatList
               data={serviceData.services}
@@ -106,7 +78,7 @@ export default class Home extends React.Component {
                   name={item.title}
                   iconUri={item.iconUri}
                   index={index}
-                  navigation={this.props.navigation}
+                  navigation={this.props.navigation} //navigation需要传递给子组件，才能在子组件中调用导航的函数
                 />
               )}
             />
@@ -142,10 +114,9 @@ class ServiceList extends Component {
           // style={[styles.item, {backgroundColor: '#f9c2ff'}]}
         >
           <View style={styles.serviceContainer}>
-            {/* require('./image/more.png') */}
             {/* {uri: this.props.url} */}
             <Image
-              source={iconArr['icon' + (this.props.index + 1)]}
+              source={imageArr['icon' + (this.props.index + 1)]}
               style={styles.serviceImg}
             />
             <View>
@@ -159,6 +130,10 @@ class ServiceList extends Component {
 }
 
 const styles = StyleSheet.create({
+  mainbody: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
   // 轮播图样式设计
   dot: {
     backgroundColor: 'transparent',
@@ -185,10 +160,6 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     resizeMode: 'repeat',
-    // borderTopLeftRadius: 20,
-    // borderTopRightRadius: 20,
-    // borderBottomRightRadius: 20,
-    // borderBottomLeftRadius: 20,
     width,
     height,
     backgroundColor: 'transparent',
