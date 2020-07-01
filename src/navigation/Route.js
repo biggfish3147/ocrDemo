@@ -2,8 +2,9 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Icon} from 'react-native-elements';
-import {StatusBar} from 'react-native';
+import {Icon, Card} from 'react-native-elements';
+import {View, StyleSheet} from 'react-native';
+import {BlurView} from 'expo-blur';
 
 import Home from '../screens/Home';
 import Record from '../screens/Record';
@@ -57,25 +58,72 @@ export function HomeTabs() {
 export default function Route() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        // mode="card"
+        headerMode="screen"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#3c78d8',
+            // opacity: 0.8,
+            // height: 60, // 指定导航栏的高度
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignSelf: 'center',
+            flex: 1,
+          },
+          headerBackTitle: '返回',
+          // headerShown: false,  //是否显示导航栏（位于页面顶部）
+          // cardStyle: {backgroundColor: 'transparent'}, //栈区卡片样式设计（背景透明的话，上一层卡片可以看到下一层卡片）
+          // cardOverlayEnabled: false,
+
+          // cardStyleInterpolator: ({current: {progress}}) => ({
+          //   cardStyle: {
+          //     opacity: progress.interpolate({
+          //       inputRange: [0, 0.5, 0.9, 1],
+          //       outputRange: [0, 0.25, 0.7, 1],
+          //     }),
+          //   },
+          //   overlayStyle: {
+          //     opacity: progress.interpolate({
+          //       inputRange: [0, 1],
+          //       outputRange: [0, 0.5],
+          //       extrapolate: 'clamp',
+          //     }),
+          //   },
+          // }),
+        }}>
         <Stack.Screen
           name="Home"
           component={HomeTabs}
           options={{
             title: 'Welcome to OcrDemo',
-            headerStyle: {
-              // #3c78d8 蓝色
-              backgroundColor: '#3c78d8',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              alignSelf: 'center',
-              flex: 1,
-            },
+            // headerShown: false,
           }}
         />
-        <Stack.Screen name="Scan" component={Scan} />
+        <Stack.Screen
+          name="Scan"
+          component={Scan}
+          options={{
+            title: '扫描',
+            // headerShown: true,
+            headerStyle: {
+              backgroundColor: '#000',
+              opacity: 0.8,
+            },
+            headerTransparent: true,
+            headerBackground: () => (
+              <BlurView
+                tint="dark"
+                intensity={100}
+                style={StyleSheet.absoluteFill}
+              />
+            ),
+            // headerBackground: '#000',
+            // cardStyle: {backgroundColor: 'transparent'},  //会看到下层卡片
+          }}
+        />
         <Stack.Screen name="Result" component={Result} />
         <Stack.Screen name="Doc" component={Doc} />
         <Stack.Screen name="Login" component={Login} />

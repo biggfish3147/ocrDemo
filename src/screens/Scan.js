@@ -35,7 +35,7 @@ class Scan extends PureComponent {
     this.takePhoto = this.takePhoto.bind(this);
     // this.takePicture = this.takePicture.bind(this);
     // this.autoTakePicture = this.autoTakePicture.bind(this);
-    // this.pauseAutoTakePicture = this.pauseAutoTakePicture.bind(this);
+    this.autoTakePhoto = this.autoTakePhoto.bind(this);
     this.getLayoutLocation = this.getLayoutLocation.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
   }
@@ -252,7 +252,7 @@ class Scan extends PureComponent {
     }
   };
 
-  autoTakePicture = () => {
+  autoTakePhoto = () => {
     if (!this.state.isAutoScan) {
       console.log('开启计时器');
       this.setState(state => ({isAutoScan: !state.isAutoScan}));
@@ -326,7 +326,12 @@ class Scan extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#3c78d8" hidden={true} />
+        <StatusBar
+          //3c78d8
+          backgroundColor="transparent"
+          hidden={false}
+          translucent={true}
+        />
         <View style={styles.topcontainer}>
           <RNCamera
             ref={ref => {
@@ -357,10 +362,23 @@ class Scan extends PureComponent {
                 将手机号信息对准框内，即可自动扫描
               </Text>
             </View>
+            <View style={styles.bottomcontainer}>
+              <View style={styles.clickcontainer}>
+                <Button
+                  title="自动扫描"
+                  onPress={this.autoTakePhoto}
+                  color="skyblue"
+                />
+                <Text style={{color: '#fff'}}>
+                  当前模式：{this.state.isAutoScan ? '自动扫描' : '拍照模式'}
+                </Text>
+                <Button title="点击拍照" onPress={this.takePhoto} color="red" />
+              </View>
+            </View>
           </RNCamera>
         </View>
 
-        <View style={styles.bottomcontainer}>
+        {/* <View style={styles.bottomcontainer}>
           <Button
             title="自动扫描"
             onPress={this.autoTakePicture}
@@ -370,7 +388,7 @@ class Scan extends PureComponent {
             当前模式：{this.state.isAutoScan ? '自动扫描' : '拍照模式'}
           </Text>
           <Button title="点击拍照" onPress={this.takePhoto} color="red" />
-        </View>
+        </View> */}
 
         <Toast
           ref={ref => {
@@ -417,17 +435,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bottomcontainer: {
-    margin: 5,
-    flex: 0,
+    padding: 10,
+    // margin: 5,
+    // marginBottom: 20,
+    flex: 0.15,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    backgroundColor: '#000',
+    opacity: 0.6,
+  },
+  clickcontainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   preview: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: 'skyblue',
+    // backgroundColor: 'skyblue',
   },
   rectangleContainer: {
     flex: 1,
@@ -435,6 +463,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: 'transparent',
     paddingTop: 20,
+    marginTop: 90,
   },
   rectangle: {
     height: 100,
@@ -456,7 +485,8 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'skyblue',
+    // backgroundColor: 'skyblue',
+    // backgroundColor: 'white',
     padding: 10,
     marginTop: 5,
     borderRadius: 5,
