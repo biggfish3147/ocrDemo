@@ -19,8 +19,10 @@ import {
 import {RNCamera} from 'react-native-camera';
 import CameraRoll from '@react-native-community/cameraroll';
 import Toast from 'react-native-easy-toast';
+import {getTrueCoordinate} from '../utils/coordinate';
 
 var locxy = [];
+var photoHeight = 960; //设置拍摄图片的纵向分辨率,单位为px
 
 class Scan extends PureComponent {
   //构造函数
@@ -33,8 +35,6 @@ class Scan extends PureComponent {
       location: [],
     };
     this.takePhoto = this.takePhoto.bind(this);
-    // this.takePicture = this.takePicture.bind(this);
-    // this.autoTakePicture = this.autoTakePicture.bind(this);
     this.autoTakePhoto = this.autoTakePhoto.bind(this);
     this.getLayoutLocation = this.getLayoutLocation.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
@@ -174,7 +174,12 @@ class Scan extends PureComponent {
       // console.log(startTime);
 
       //拍摄图片的参数（quality：图片质量/压缩比率）
-      const options = {quality: 0.5, base64: false, width: 1000};
+      const options = {
+        quality: 0.5,
+        base64: false,
+        width: 960,
+        orientation: 1,
+      };
       const data = await this.camera.takePictureAsync(options);
 
       console.log(data);
@@ -305,9 +310,19 @@ class Scan extends PureComponent {
 
         locxy = this.state.location;
         console.log(this.state.location);
+        console.log(locxy);
+        console.log('*****');
+        let truecoor = getTrueCoordinate(photoHeight);
+        console.log(truecoor);
       },
     );
   };
+
+  /**
+   *
+   * @param {height} 设置的照片的纵向尺寸
+   */
+  //调用工具函数
 
   /**
    * 获取组件在屏幕中的绝对位置（点击按钮时获得）
@@ -377,19 +392,6 @@ class Scan extends PureComponent {
             </View>
           </RNCamera>
         </View>
-
-        {/* <View style={styles.bottomcontainer}>
-          <Button
-            title="自动扫描"
-            onPress={this.autoTakePicture}
-            color="skyblue"
-          />
-          <Text>
-            当前模式：{this.state.isAutoScan ? '自动扫描' : '拍照模式'}
-          </Text>
-          <Button title="点击拍照" onPress={this.takePhoto} color="red" />
-        </View> */}
-
         <Toast
           ref={ref => {
             this.toast = ref;
