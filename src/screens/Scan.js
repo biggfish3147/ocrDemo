@@ -133,8 +133,10 @@ class Scan extends PureComponent {
       //封装在表单数据对象中
       let formData = new FormData();
       formData.append('file', file);
-
-      // formData.append('loc', locxy);
+      formData.append('x1', locxy[0]);
+      formData.append('y1', locxy[1]);
+      formData.append('x2', locxy[2]);
+      formData.append('y2', locxy[3]);
 
       console.log(formData);
 
@@ -206,8 +208,9 @@ class Scan extends PureComponent {
             time: startTime,
           };
 
-          //http://47.95.206.210:8080/decodeImg
-          this.uploadFile('http://47.95.206.210:8080/decodeImg', fileParams)
+          //条码识别api： http://47.95.206.210:8080/decodeImg
+          //电话号码识别api： http://3c08p47432.zicp.vip/decodeAPI
+          this.uploadFile('http://3c08p47432.zicp.vip/decodeAPI', fileParams)
             .then(res => {
               //响应数据
               console.log(res);
@@ -218,6 +221,7 @@ class Scan extends PureComponent {
                 '获取到响应数据(外层)耗时：  ' + (resultTime - startTime),
               );
 
+              console.log(res.statusFlag);
               // this.toast.show(
               //   '识别成功\n' + `${res.barcode}` + '\n' + `${res.totalTime}`,
               // );
@@ -228,17 +232,25 @@ class Scan extends PureComponent {
 
               //完善版的响应数据
 
-              if ((res.status = '200')) {
+              if (res.statusFlag === '200') {
                 console.log('识别成功，正常返回！');
                 this.toast.show(
-                  '识别成功\n' + `${res.barcode}` + '\n' + `${res.totalTime}`,
+                  '识别成功\n条码：' +
+                    `${res.barcode}` +
+                    '\n手机号码：' +
+                    `${res.phoneNumber}`,
                 );
-              } else if ((res.status = '204')) {
+              } else if (res.statusFlag === '204') {
                 console.log('识别超时！');
                 this.toast.show('请求超时，请重试！');
-              } else if ((res.status = '400')) {
+              } else if (res.statusFlag === '500') {
                 console.log('识别失败！');
-                this.toastErro.show('识别失败！');
+                this.toastErro.show(
+                  '识别失败！\n条码：' +
+                    `${res.barcode}` +
+                    '\n手机号码：' +
+                    `${res.phoneNumber}`,
+                );
               } else {
                 this.toastErro.show('出现错误！');
               }
@@ -271,7 +283,7 @@ class Scan extends PureComponent {
 
   /**
    * 获取组件在屏幕中的绝对位置(布局时获得)
-   *
+   * 补充：通过大致的估算得出，扫描框底下内容相对图片的位置
    */
   // var windowWidth = Dimensions.get('window').width; //获取手机宽度
   // var windowHeight = Dimensions.get('window').height; //获取手机高度
@@ -308,12 +320,13 @@ class Scan extends PureComponent {
           location: state.location.concat(loc),
         }));
 
-        locxy = this.state.location;
-        console.log(this.state.location);
-        console.log(locxy);
-        console.log('*****');
+        // locxy = this.state.location;
+        // console.log(this.state.location);
+        // console.log(locxy);
+        // console.log('*****');
         let truecoor = getTrueCoordinate(photoHeight);
-        console.log(truecoor);
+        locxy = truecoor;
+        console.log(locxy);
       },
     );
   };

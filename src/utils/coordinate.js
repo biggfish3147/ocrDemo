@@ -8,7 +8,7 @@
  * 传入参数为图片分辨率的height。750x1000尺寸，则值为1000。
  *
  * 补充：仔细想来，扫描框组件相对屏幕位置是固定的。那么扫描框底下内容相对图片（尺寸与屏幕不一）的位置也应该相对固定。
- * 720x960尺寸测试，组件的宽度系数为0.7更合适（精准）
+ * 720x960尺寸测试，组件的宽度系数为0.7更合适（精准）0.8/0.7
  */
 
 export function getTrueCoordinate(height) {
@@ -17,7 +17,7 @@ export function getTrueCoordinate(height) {
 
   var x = height / 10 + (width - height / 5) / 15;
   var y = 0.16 * height;
-  var conponentWidth = 0.8 * width;
+  var conponentWidth = 0.7 * width;
   var conponentHeight = 0.15 * height;
 
   var coordinate = [x, y, conponentWidth + x, conponentHeight + y];
