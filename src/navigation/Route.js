@@ -101,7 +101,7 @@ export default class Route extends React.Component {
           <Stack.Screen
             name="Scan"
             component={Scan}
-            options={{
+            options={({navigation, route}) => ({
               title: '扫描',
               // headerShown: true,
               headerStyle: {
@@ -118,8 +118,8 @@ export default class Route extends React.Component {
               ),
               headerRight: () => (
                 <Button
-                  onPress={() => alert('This is a button!')}
-                  title="设置"
+                  onPress={() => navigation.navigate('Result')}
+                  title="记录"
                   color="transparent"
                   style={{
                     // padding: 5,
@@ -129,7 +129,7 @@ export default class Route extends React.Component {
               ),
               // headerBackground: '#000',
               // cardStyle: {backgroundColor: 'transparent'},  //会看到下层卡片
-            }}
+            })}
           />
           <Stack.Screen name="Result" component={Result} />
           <Stack.Screen name="Doc" component={Doc} />
