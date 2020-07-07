@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon, Card} from 'react-native-elements';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text, Button} from 'react-native';
 import {BlurView} from 'expo-blur';
 
 import Home from '../screens/Home';
@@ -68,11 +68,22 @@ export default function Route() {
             // height: 60, // 指定导航栏的高度
           },
           headerTintColor: '#fff',
+          headerPressColorAndroid: 'skyblue',
           headerTitleStyle: {
             fontWeight: 'bold',
             alignSelf: 'center',
             flex: 1,
           },
+          // headerRight: () => (
+          //   <View>
+          //     <Text />
+          //   </View>
+          //   // <Button
+          //   //   onPress={() => alert('This is a button!')}
+          //   //   title="Info"
+          //   //   color="#3c78d8"
+          //   // />
+          // ),
           headerBackTitle: '返回',
           // headerShown: false,  //是否显示导航栏（位于页面顶部）
           // cardStyle: {backgroundColor: 'transparent'}, //栈区卡片样式设计（背景透明的话，上一层卡片可以看到下一层卡片）
@@ -119,6 +130,11 @@ export default function Route() {
                 intensity={100}
                 style={StyleSheet.absoluteFill}
               />
+            ),
+            headerRight: () => (
+              <View>
+                <Text />
+              </View>
             ),
             // headerBackground: '#000',
             // cardStyle: {backgroundColor: 'transparent'},  //会看到下层卡片
