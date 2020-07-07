@@ -19,10 +19,13 @@ import {
 import {RNCamera} from 'react-native-camera';
 import CameraRoll from '@react-native-community/cameraroll';
 import Toast from 'react-native-easy-toast';
+// import AsyncStorage from '@react-native-community/async-storage';
 import {getTrueCoordinate} from '../utils/coordinate';
 
 var locxy = [];
-var photoHeight = 960; //设置拍摄图片的纵向分辨率,单位为px
+var photoHeight = 960; //设置拍摄图片的纵向分辨率,单位为px(有问题！这里应该是我们观测到的高度，纵向比较长，实质上，这个值是图片的width属性)
+// var scanResult = require('../assets/data/scanResultData.json').scanResult; //临时存放扫描结果
+var scanResult = {scanResultList: []};
 
 class Scan extends PureComponent {
   //构造函数
@@ -64,6 +67,18 @@ class Scan extends PureComponent {
   //     url: data,
   //   });
   //   console.log(data);
+  // };
+
+  //存储数据
+
+  // storeData = async value => {
+  //   try {
+  //     const jsonValue = JSON.stringify(value);
+  //     await AsyncStorage.setItem('res', jsonValue);
+  //   } catch (e) {
+  //     // saving error
+  //     console.log(e);
+  //   }
   // };
 
   /**
@@ -215,13 +230,20 @@ class Scan extends PureComponent {
               //响应数据
               console.log(res);
 
+              //保存响应数据在scanResult变量中（json数组）
+              scanResult.scanResultList.push(res);
+              // this.storeData(scanResult);
+              //参见：js向数组插入数据push unshift splice
+              console.log(scanResult);
+
               //获得响应数据的时间戳
               var resultTime = new Date().getTime();
               console.log(
                 '获取到响应数据(外层)耗时：  ' + (resultTime - startTime),
               );
 
-              console.log(res.statusFlag);
+              // console.log(res.statusFlag);
+
               // this.toast.show(
               //   '识别成功\n' + `${res.barcode}` + '\n' + `${res.totalTime}`,
               // );
@@ -240,6 +262,19 @@ class Scan extends PureComponent {
                     '\n手机号码：' +
                     `${res.phoneNumber}`,
                 );
+
+                //保存响应数据在scanResult变量中（json数组）
+                // scanResult.push(res);
+
+                //参见：js向数组插入数据push unshift splice
+                // console.log(scanResult);
+
+                //测试导航页面之前传递数据
+                // this.props.navigation.navigate('Result', {
+                //   id: '100',
+                //   name: '新闻1',
+                //   tag: '重要',
+                // });
               } else if (res.statusFlag === '204') {
                 console.log('识别超时！');
                 this.toast.show('请求超时，请重试！');
@@ -252,7 +287,7 @@ class Scan extends PureComponent {
                     `${res.phoneNumber}`,
                 );
               } else {
-                this.toastErro.show('出现错误！');
+                this.toastErro.show('服务器连接失败！');
               }
 
               var toastTime = new Date().getTime();
@@ -260,7 +295,7 @@ class Scan extends PureComponent {
             })
             .catch(err => {
               console.log(err);
-              this.toastErro.show('出现错误！！！');
+              this.toastErro.show('网络连接失败！！！');
             });
         } else {
           console.log('写文件权限未授予');
