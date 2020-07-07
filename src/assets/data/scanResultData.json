@@ -1,0 +1,19 @@
+{
+    "demo": [
+        {
+            "id": 1,
+            "statusFlag": "200",
+            "barcode": "JD0015493781005-1-1-",
+            "phoneNumber": "17745678912",
+            "date": "20200705"
+        },
+        {
+            "id": 1,
+            "statusFlag": "500",
+            "barcode": "NOT FOUND",
+            "phoneNumber": "NOT FOUND",
+            "date": "20200705"
+        }
+    ],
+    "scanResult": []
+}

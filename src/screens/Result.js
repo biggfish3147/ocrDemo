@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import {StyleSheet, View, ScrollView, Text} from 'react-native';
+// import AsyncStorage from '@react-native-community/async-storage';
 import {Table, TableWrapper, Row} from 'react-native-table-component';
 //import getJsonLength from '../utils/jsonLength';
 
-const testJsonArr = require('../assets/data/resultdata.json');
+const testJsonArr = require('../assets/data/resultDataDemo.json');
 //定义全局变量
 var tableData = [];
 
@@ -13,8 +14,33 @@ export default class Result extends Component {
     this.state = {
       tableHead: ['Id', 'Barcode', 'Name', 'Tel', 'Status', 'Time', 'Date'],
       widthArr: [40, 160, 80, 120, 50, 40, 160],
+      // id: '',
+      // name: '',
+      // tag: '',
     };
   }
+
+  componentDidMount() {
+    //测试传参
+    // const {
+    //   params: {id, name, tag},
+    // } = this.props.route;
+    // console.log('id: ', id);
+    // console.log('name: ', name);
+    // console.log('tag: ', tag);
+  }
+
+  //读取数据
+
+  // getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem('res');
+  //     console.log('RES值：' + jsonValue);
+  //     return jsonValue != null ? JSON.parse(jsonValue) : null;
+  //   } catch (e) {
+  //     // error reading value
+  //   }
+  // };
 
   //json数组转换为二维数组
   getTableData = jsonArr => {
@@ -52,10 +78,19 @@ export default class Result extends Component {
     // const tableData = this.state.tableData;
     //this.getTableData(testJsonArr);
 
+    // const storeData = this.getData();
+
+    // const {id} = this.props.route.params;
+    // const {name} = this.props.route.params;
+
     return (
       <View style={styles.container}>
         <ScrollView horizontal={true}>
           <View>
+            {/* <Text>参数1:{id}</Text> */}
+            {/* <Text>参数1:{name}</Text> */}
+            {/* <Text>{storeData}</Text> */}
+
             <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
               <Row
                 data={state.tableHead}
