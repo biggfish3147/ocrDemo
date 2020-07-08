@@ -1,6 +1,7 @@
 package com.ocrdemo;
 
 import android.app.Application;
+// import android.support.multidex.MultiDexApplication;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
@@ -10,8 +11,16 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+//import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;  //巨坑
 
 public class MainApplication extends Application implements ReactApplication {
+
+  @Override
+  protected void attachBaseContext(Context base) {
+     super.attachBaseContext(base);
+     MultiDex.install(this);
+  }
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
