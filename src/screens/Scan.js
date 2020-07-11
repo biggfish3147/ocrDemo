@@ -19,7 +19,7 @@ import {
 import {RNCamera} from 'react-native-camera';
 import CameraRoll from '@react-native-community/cameraroll';
 import Toast from 'react-native-easy-toast';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import {getTrueCoordinate} from '../utils/coordinate';
 
 var locxy = [];
@@ -71,15 +71,15 @@ class Scan extends PureComponent {
 
   //存储数据
 
-  // storeData = async value => {
-  //   try {
-  //     const jsonValue = JSON.stringify(value);
-  //     await AsyncStorage.setItem('res', jsonValue);
-  //   } catch (e) {
-  //     // saving error
-  //     console.log(e);
-  //   }
-  // };
+  storeData = async value => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('res', jsonValue);
+    } catch (e) {
+      // saving error
+      console.log(e);
+    }
+  };
 
   /**
    * 获取写文件权限，后续才能将图片保存在相册
@@ -232,9 +232,9 @@ class Scan extends PureComponent {
 
               //保存响应数据在scanResult变量中（json数组）
               scanResult.scanResultList.push(res);
-              // this.storeData(scanResult);
+              this.storeData(scanResult);
               //参见：js向数组插入数据push unshift splice
-              console.log(scanResult);
+              // console.log(scanResult);
 
               //获得响应数据的时间戳
               var resultTime = new Date().getTime();
@@ -295,7 +295,7 @@ class Scan extends PureComponent {
             })
             .catch(err => {
               console.log(err);
-              this.toastErro.show('网络连接失败！！！');
+              this.toastErro.show('请求连接失败！！！');
             });
         } else {
           console.log('写文件权限未授予');

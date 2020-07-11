@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
 import {StyleSheet, View, ScrollView, Text} from 'react-native';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import {Table, TableWrapper, Row} from 'react-native-table-component';
 //import getJsonLength from '../utils/jsonLength';
 
@@ -14,33 +15,40 @@ export default class Result extends Component {
     this.state = {
       tableHead: ['Id', 'Barcode', 'Name', 'Tel', 'Status', 'Time', 'Date'],
       widthArr: [40, 160, 80, 120, 50, 40, 160],
-      // id: '',
-      // name: '',
-      // tag: '',
+      dataSource: {},
     };
   }
 
+  // componentDidMount() {
+  //测试传参
+  // const {
+  //   params: {id, name, tag},
+  // } = this.props.route;
+  // console.log('id: ', id);
+  // console.log('name: ', name);
+  // console.log('tag: ', tag);
+  // }
+
   componentDidMount() {
-    //测试传参
-    // const {
-    //   params: {id, name, tag},
-    // } = this.props.route;
-    // console.log('id: ', id);
-    // console.log('name: ', name);
-    // console.log('tag: ', tag);
+    this.getData().then(data => {
+      this.setState({
+        dataSource: data,
+      });
+    });
   }
 
   //读取数据
 
-  // getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem('res');
-  //     console.log('RES值：' + jsonValue);
-  //     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  //   } catch (e) {
-  //     // error reading value
-  //   }
-  // };
+  getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('res');
+      // console.log('RES值：' + jsonValue);
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+      // return jsonValue != null ? jsonValue : null;
+    } catch (e) {
+      // error reading value
+    }
+  };
 
   //json数组转换为二维数组
   getTableData = jsonArr => {
@@ -78,7 +86,33 @@ export default class Result extends Component {
     // const tableData = this.state.tableData;
     //this.getTableData(testJsonArr);
 
+    // const storeData = this.getData().then(jsonObject => {
+    //   console.log(jsonObject);
+    //   return jsonObject;
+    // });
+
     // const storeData = this.getData();
+    const storeData = state.dataSource;
+    console.log(typeof storeData);
+
+    const storeDataStr = JSON.stringify(storeData);
+    console.log('state中数据源' + storeDataStr);
+
+    // for (let i in storeData) {
+    //   console.log(i);
+    //   console.log(storeData[i]);
+    // }
+
+    // console.log(typeof storeDataStr);
+    // console.log('json字符串' + storeDataStr);
+
+    // console.log(typeof testJsonArr);
+
+    // let storeDataArr = this.getTableData(storeData.scanResultList);
+
+    // console.log(typeof storeDataArr);
+
+    // console.log('json数组转换为二维数组' + storeDataArr);
 
     // const {id} = this.props.route.params;
     // const {name} = this.props.route.params;
@@ -89,7 +123,7 @@ export default class Result extends Component {
           <View>
             {/* <Text>参数1:{id}</Text> */}
             {/* <Text>参数1:{name}</Text> */}
-            {/* <Text>{storeData}</Text> */}
+            <Text>{storeDataStr}</Text>
 
             <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
               <Row
